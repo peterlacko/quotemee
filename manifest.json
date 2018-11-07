@@ -1,0 +1,33 @@
+{
+    "manifest_version": 2,
+    "name": "QuoteMeee",
+    "version": "1.0",
+
+    "description": "Saves quotes from webpages along with other metadata",
+
+    "icons": {
+      "48": "icons/two-quotes-48.png"
+    },
+    "permissions": [
+        "tabs",
+        "storage",
+        "<all_urls>",
+        "contextMenus",
+        "notifications"
+    ],
+    "browser_action": {
+        "default_icon": "icons/two-quotes-32.png",
+        "default_title": "Show my saved quotes",
+        "default_popup": "src/popup/quotesMenu.html"
+      },
+
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["src/content-scripts/quote.js"],
+        "css": ["src/content-scripts/quote.css"],
+        "run_at": "document_start"
+      }
+    ]
+
+  }
