@@ -11,18 +11,13 @@ function clearLocalStorage() {
 }
 
 function filterQuotes() {
-    // test.textContent = filterInput.value;
     const filter = filterInput.value.toUpperCase();
-    // test.textContent = filterInput.value;
     const li = document.getElementsByTagName('li');
-    // test.textContent = 'length' + li.length;
     for (let i = 0; i < li.length; i++) {
         const span = li[i].getElementsByTagName('span')[0];
         if (span.textContent.toUpperCase().indexOf(filter) > -1) {
-            // test.textContent = span.textContent.toUpperCase();
             li[i].style.display = '';
         } else {
-            // test.textContent = span.textContent.toUpperCase() + '  ', span.textContent.toUpperCase();
             li[i].style.display = 'none';
         }
     }
@@ -31,8 +26,9 @@ function filterQuotes() {
 browser.storage.local.get(null).then(processQuotes).catch(setErrorState);
 
 function processQuotes(quotes) {
-    // test.textContent = JSON.stringify(result);
-    for (const key in quotes) {
+    const keys = Object.keys(quotes);
+    const sortedKeys = keys.sort((a, b) => b.localeCompare(a));
+    for (const key of sortedKeys) {
         const li = document.createElement('li');
         const span = document.createElement('span');
         span.className = 'quote_element';
